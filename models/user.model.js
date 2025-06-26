@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import userSchema from "../schemas/users.schema";
+import userSchema from "../schemas/user.schema";
 
 export default class UserModel {
   constructor() {
