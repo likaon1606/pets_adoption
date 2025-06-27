@@ -1,34 +1,19 @@
 import express from 'express';
-import cors from 'cors';
 import morgan from 'morgan';
+import cors from 'cors';
 
-class App {
-  constructor() {
-    this.app = express();
-    this.middlewares();
-    this.routes();
-  }
+import usersRoutes from './routes/users.routes.js';
 
-  middlewares() {
-    this.app.use(cors());
-    this.app.use(morgan('dev'));
-    this.app.use(express.json());
-  }
+const app = express();
 
-  routes() {
-    this.app.get('/', (req,res) => {
-      res.json({ message: 'Welcome to the API adoption_pets!' });
-    })
+// Middlewares
+app.use(express.json());
+app.use(morgan('dev'));
+app.use(cors());
 
-    //TODO Swagger documentations
+// TODO routes
+app.use('/api/users', usersRoutes);
 
-    //TODO Main routes
+// TODO SWAGGER
 
-  }
-
-  getApp() {
-    return this.app;
-  }
-}
-
-export default new App().getApp()
+export default app;

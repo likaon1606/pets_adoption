@@ -1,26 +1,16 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-class Database {
-  constructor() {
-    this.connection = null;
-  }
-
-  async connect() {
-    if (this.connection) 
-      return this.connection;
-
-    try {
-      this.connection = await mongoose.connect(process.env.MONGO_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      });
-      console.log("MongoDb - Database connected successfully");
-      return this.connection;
-    } catch (error) {
-      console.error("MongoDb - Database connection failed: ", error);
-      throw error;
-    }
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    console.log('MongoDB connected successfully');
+  } catch (error) {
+    console.log('Error connecting to MongoDB:', error.message);
+    process.exit(1); // Exit process with failure
   }
 };
 
-export default new Database();
+export default connectDB;

@@ -2,26 +2,20 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import app from './app.js';
-import database from './config/database.js';
+import connectDB from './config/database.js';
 
-class Server {
-  constructor() {
-    this.port = process.env.PORT || 3000;
-    this.app = app;
+const PORT = process.env.PORT || 3000;
+
+const startServer = async () => {
+  try {
+    await connectDB();
+    app.listen(PORT, () =>{
+      console.log(`Server is running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error('Error starting the server: ', error.message);
+    process.exit(1); // Exit process with failure
   }
+};
 
-  async start() {
-    try {
-      await database.connect();
-      this.app.listen(this.port, () => {
-        console.log(`Server is running on port ${this.port}`);
-      });
-    } catch (error) {
-      console.error("Failed to start the server: ", error);
-      process.exit(1);
-    }
-  }
-}
-
-const server = new Server();
-server.start();
+startServer();
