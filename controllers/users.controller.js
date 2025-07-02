@@ -1,18 +1,8 @@
-import bcrypt from "bcrypt";
 import UserModel from "../models/user.model.js";
 
 export const createUser = async (req, res) => {
   try {
-    const { password, ...rest } = req.body;
-
-    if (!password) {
-      return res.status(400).json({ message: "Password is required" });
-    }
-
-    const saltRounds = 10;
-    const password_hash = await bcrypt.hash(password, saltRounds);
-
-    const user = await UserModel.create({ ...rest, password_hash });
+    const user = await UserModel.create(req.body);
 
     res.status(201).json({
       message: "User created successfully",
