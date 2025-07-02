@@ -8,13 +8,15 @@
     "dev": "nodemon server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "ariel_fuentes_garcía",
   "license": "ISC",
-  "description": "",
+  "description": "API para poder adoptar mascotas de un refugio",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.16.0",
     "morgan": "^1.10.0"
   }

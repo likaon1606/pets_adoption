@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 
 import usersRoutes from './routes/users.routes.js';
+import authRoutes from './routes/auth.routes.js';
 
 const app = express();
 
@@ -11,8 +12,9 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use(cors());
 
-// TODO routes
 app.use('/api/users', usersRoutes);
+app.use('/api/auth', authRoutes);
+// TODO routes adopters
 
 // TODO SWAGGER
 
