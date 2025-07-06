@@ -13,7 +13,16 @@ import { validateAndHashPassword  } from "../middlewares/validatePassword.middle
 
 const router = Router();
 
-router.post("/register-adopters", validateAndHashPassword, createUser);
+router.post(
+  '/register-adopters',
+  validateAndHashPassword,
+  (req, res, next) => {
+    req.body.role = 'adopter';  // aquí forzamos el rol
+    next();
+  },
+  createUser
+);
+
 router.get("/users", verifyToken, getAllUsers);
 router.get("/users/:id", getUserById);
 router.get("/users/email/:email", getUserByEmail);

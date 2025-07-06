@@ -13,10 +13,11 @@ router.post(
   checkAdminRole,
   validateAndHashPassword,
   (req, res, next) => {
-    req.body.role = 'administrator'; // forzar rol admin
+    req.body.role = 'administrator';  // aquí forzamos el rol
     next();
   },
   createUser
 );
+
 
 export default router;
